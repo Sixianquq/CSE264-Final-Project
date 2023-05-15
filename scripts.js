@@ -9,8 +9,8 @@ let gameAccuracy = 0;
 // Function to move the target randomly
 function moveTarget() {
   console.log(target.style.left)
-  const maxWidth = window.innerWidth - target.offsetWidth - 100;
-  const maxHeight = window.innerHeight - target.offsetHeight - 100;
+  const maxWidth = window.innerWidth - target.offsetWidth - 130;
+  const maxHeight = window.innerHeight - target.offsetHeight - 130;
   const newLeft = Math.floor((Math.random() - 0.5) * maxWidth);
   const newTop = Math.floor((Math.random() - 0.5) * maxHeight);
   console.log(window.newLeft)
@@ -23,6 +23,7 @@ function startGame() {
   gameStarted = true;
   gameScore = 0;
   gameAccuracy = 0;
+  clickTimes = 0;
   score.innerHTML = gameScore;
   accuracy.innerHTML = gameAccuracy;
   moveTarget();
@@ -46,6 +47,9 @@ function setTargetSize(size) {
   targetSize = size;
   target.style.width = `${targetSize}px`;
   target.style.height = `${targetSize}px`;
+  gameScore = 0;
+  gameAccuracy = 0;
+  clickTimes = 0;
 }
 
 // Event listeners for difficulty buttons
