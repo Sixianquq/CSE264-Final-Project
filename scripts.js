@@ -1,9 +1,11 @@
 // Set up variables
 const target = document.getElementById('game-target');
 const score = document.getElementById('score');
+const accuracy = document.getElementById('accuracy');
 let gameStarted = false;
 let gameScore = 0;
-
+let clickTimes = 0;
+let gameAccuracy = 0;
 // Function to move the target randomly
 function moveTarget() {
   console.log(target.style.left)
@@ -20,7 +22,9 @@ function moveTarget() {
 function startGame() {
   gameStarted = true;
   gameScore = 0;
+  gameAccuracy = 0;
   score.innerHTML = gameScore;
+  accuracy.innerHTML = gameAccuracy;
   moveTarget();
   target.addEventListener('click', handleTargetClick);
 }
@@ -28,7 +32,9 @@ function startGame() {
 // Function to handle clicks on the target
 function handleTargetClick() {
   gameScore++;
+  gameAccuracy = gameScore / clickTimes;
   score.innerHTML = gameScore;
+  accuracy.innerHTML = gameAccuracy.toFixed(4) * 100 + '%';
   moveTarget();
 }
 
@@ -52,6 +58,8 @@ mediumButton.addEventListener('click', () => setTargetSize(30));
 const hardButton = document.getElementById('hard-button');
 hardButton.addEventListener('click', () => setTargetSize(15));
 
+function handleScreenClick() {
+  clickTimes++;
+}
 
-// Resize event listener to update target position on window resize
-window.addEventListener('resize', moveTarget);
+window.addEventListener('click', handleScreenClick);
